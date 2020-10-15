@@ -1,0 +1,49 @@
+server:
+  port: 8761
+spring:
+# spring security
+  security:
+    user:
+      name: admin
+      password: admin
+      roles: SYS_ADMIN # 此处不能添加ROLE_前缀 框架会自动添加
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://hk-cdb-39j6wxc5.sql.tencentcdb.com:63978/TestSWZ?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: swz123
+    password: swz123456!@#
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 180000
+      maximum-pool-size: 10
+      auto-commit: false
+      pool-name: MyHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    open-in-view: false #在事务外也可以访问懒加载的数据
+    properties:
+      hibernate.jdbc.time_zone: Asia/Shanghai
+      hibernate.connection.provider_disables_autocommit: true
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+# REDIS
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password: redis
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: -1
+        max-idle: 10
+        min-idle: 0
